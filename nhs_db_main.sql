@@ -1,9 +1,3 @@
-DROP DATABASE IF EXISTS nhs_db;
-CREATE DATABASE nhs_db;
-USE nhs_db;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: nhs_db
@@ -24,6 +18,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 --
 -- Table structure for table `appointment_log`
 --
+DROP DATABASE IF EXISTS nhs_db;
+CREATE DATABASE nhs_db;
+USE nhs_db;
+
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS `appointment_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
