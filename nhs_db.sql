@@ -244,18 +244,9 @@ CREATE USER 'patient_user'@'localhost' IDENTIFIED BY 'PatientPass123!';
 CREATE USER 'receptionist_user'@'localhost' IDENTIFIED BY 'ReceptionPass123!';
 
 GRANT ALL PRIVILEGES ON nhs_db.* TO 'admin_user'@'localhost';
-
-GRANT SELECT, UPDATE ON nhs_db.Appointments TO 'doctor_user'@'localhost';
-GRANT SELECT ON nhs_db.Patients TO 'doctor_user'@'localhost';
-GRANT SELECT ON nhs_db.Medications TO 'doctor_user'@'localhost';
-
-GRANT SELECT ON nhs_db.Appointments TO 'patient_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON nhs_db.Appointments TO 'doctor_user'@'localhost';
 GRANT SELECT ON nhs_db.Patients TO 'patient_user'@'localhost';
-
 GRANT SELECT, INSERT, UPDATE ON nhs_db.Appointments TO 'receptionist_user'@'localhost';
-GRANT SELECT ON nhs_db.Patients TO 'receptionist_user'@'localhost';
-GRANT SELECT ON nhs_db.Doctors TO 'receptionist_user'@'localhost';
-GRANT SELECT ON nhs_db.Clinics TO 'receptionist_user'@'localhost';
 
 FLUSH PRIVILEGES;
 
@@ -264,10 +255,7 @@ SHOW GRANTS FOR 'doctor_user'@'localhost';
 SHOW GRANTS FOR 'patient_user'@'localhost';
 SHOW GRANTS FOR 'receptionist_user'@'localhost';
 
-SELECT 
-    user,
-    host,
-    plugin
+SELECT user, host, plugin
 FROM mysql.user
 WHERE user IN ('admin_user','doctor_user','patient_user','receptionist_user');
 
