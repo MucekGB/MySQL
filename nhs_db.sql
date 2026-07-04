@@ -101,7 +101,9 @@ INSERT INTO Medications (MedicationName) VALUES
 ('Salbutamol'),
 ('Cetirizine');
 
-INSERT INTO Appointments (PatientID, DoctorID, ClinicID, AppointmentDate, AppointmentTime, Notes) VALUES
+INSERT INTO Appointments 
+    (PatientID, DoctorID, ClinicID, AppointmentDate, AppointmentTime, Notes) 
+    VALUES
 ('P001',1,1,'2024-05-01','10:00:00','Follow-up'),
 ('P002',2,2,'2024-05-03','09:00:00','First visit'),
 ('P003',3,3,'2024-05-05','11:30:00','Headache'),
@@ -113,7 +115,7 @@ INSERT INTO Appointments (PatientID, DoctorID, ClinicID, AppointmentDate, Appoin
 ('P009',9,7,'2024-05-17','11:00:00','Ear pain'),
 ('P010',10,8,'2024-05-20','16:00:00','X-ray appointment');
 
-INSERT INTO Appointment_Medications VALUES
+INSERT INTO Appointment_Medications (AppointmentID, MedicationID) VALUES
 (1,1),
 (1,2),
 (2,3),
@@ -149,7 +151,8 @@ INNER JOIN Clinics c ON a.ClinicID = c.ClinicID;
 
 SELECT 
     a.AppointmentID,
-    m.MedicationName
+    m.MedicationName,
+    m.MedicationID
 FROM Appointment_Medications am
 RIGHT JOIN Medications m ON am.MedicationID = m.MedicationID
 LEFT JOIN Appointments a ON am.AppointmentID = a.AppointmentID;
@@ -157,16 +160,18 @@ LEFT JOIN Appointments a ON am.AppointmentID = a.AppointmentID;
 SELECT 
     a.AppointmentID,
     m.MedicationName
-FROM Appointments a
-LEFT JOIN Appointment_Medications am ON a.AppointmentID = am.AppointmentID
-LEFT JOIN Medications m ON am.MedicationID = m.MedicationID
+FROM Appointment_Medications a
+LEFT JOIN Medications m
+ON a.MedicationID = m.MedicationID
+
 UNION
+
 SELECT 
     a.AppointmentID,
     m.MedicationName
-FROM Appointments a
-RIGHT JOIN Appointment_Medications am ON a.AppointmentID = am.AppointmentID
-RIGHT JOIN Medications m ON am.MedicationID = m.MedicationID;
+FROM Appointment_Medications a
+RIGHT JOIN Medications m
+ON a.MedicationID = m.MedicationID;
 
 SELECT 
     c.ClinicName,
@@ -175,14 +180,16 @@ FROM Clinics c
 LEFT JOIN Appointments a ON c.ClinicID = a.ClinicID
 GROUP BY c.ClinicName;
 
-SELECT 
+SELECT
     AppointmentID,
     PatientID,
+    DoctorID,
+    ClinicID,
     AppointmentDate,
     AppointmentTime,
     Notes
 FROM Appointments
-WHERE AppointmentDate > '2024-05-05'
+WHERE AppointmentDate >= '2024-05-03'
 ORDER BY AppointmentDate ASC;
 
 DELIMITER //
