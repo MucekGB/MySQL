@@ -53,7 +53,7 @@ CREATE TABLE Appointment_Log (
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Patients VALUES
+INSERT INTO Patients (PatientID, PatientName, Address) VALUES
 ('P001','John Smith','123 Hill Rd'),
 ('P002','Mary Jones','456 Lake Ave'),
 ('P003','David White','789 Oak St'),
@@ -125,12 +125,6 @@ INSERT INTO Appointment_Medications VALUES
 (8,9),
 (9,10);
 
-
-DELETE FROM Appointment_Medications
-WHERE AppointmentID = 9 AND MedicationID = 10;
-
-INSERT INTO Appointment_Medications VALUES
-(9,10);
 
 SELECT 
     p.PatientID,
