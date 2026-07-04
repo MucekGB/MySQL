@@ -125,9 +125,6 @@ INSERT INTO Appointment_Medications VALUES
 (8,9),
 (9,10);
 
-UPDATE Patients
-SET Address = '65 Market Street'
-WHERE PatientID = 'P010';
 
 DELETE FROM Appointment_Medications
 WHERE AppointmentID = 9 AND MedicationID = 10;
