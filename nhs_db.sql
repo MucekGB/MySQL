@@ -226,8 +226,10 @@ DELIMITER ;
 
 CALL GetPatientAppointments('P001');
 
-INSERT INTO Appointments (PatientID, DoctorID, ClinicID, AppointmentDate, AppointmentTime, Notes)
-VALUES ('P001',1,1,'2024-06-01','12:00:00','Checkup');
+INSERT INTO
+Appointments (PatientID, DoctorID, ClinicID, AppointmentDate, AppointmentTime, Notes)
+VALUES
+('P001',1,1,'2024-06-01','12:00:00','Checkup');
 
 SELECT * FROM Appointment_Log;
 
